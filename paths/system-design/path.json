@@ -1,0 +1,385 @@
+{
+  "schema_version": 1,
+  "id": "system-design",
+  "title": "System design for interviews",
+  "goal": "Pass junior-to-mid system-design interviews as a full-stack (React/Next/Node/NestJS) engineer: structure a 45-minute design, reason about trade-offs, and deliver a working system for common prompts",
+  "learner": {
+    "purpose": "interview",
+    "level": "beginner (self-rated), junior-to-mid full-stack",
+    "hours_per_week": 10,
+    "deadline": "1-3 months"
+  },
+  "version": 2,
+  "nodes": [
+    {
+      "id": "n02",
+      "topic": "back-of-envelope-estimation",
+      "title": "Back-of-envelope estimation",
+      "why": "Numbers (QPS, storage, bandwidth) justify every later choice: one box or many, cache or not, shard or not",
+      "kind": "core",
+      "depth": "use",
+      "prereqs": [],
+      "detail": "full",
+      "focus": [
+        "latency numbers and powers of two",
+        "QPS and peak QPS from daily active users",
+        "storage and bandwidth estimates",
+        "when estimation changes a design decision"
+      ],
+      "outcomes": [
+        "estimate average and peak QPS, 5-year storage and bandwidth for a feature within 2x in 5 minutes",
+        "use an estimate to decide whether a component needs to scale out, and say why",
+        "rank memory, SSD, same-datacenter and cross-region latencies by order of magnitude"
+      ],
+      "est_hours": 4,
+      "source_ids": [
+        "S0001",
+        "S0004",
+        "S0008"
+      ]
+    },
+    {
+      "id": "n03",
+      "topic": "scaling-the-web-tier",
+      "title": "Scaling the web tier: DNS, load balancers, CDN",
+      "why": "Every design diagram starts with client -> DNS -> load balancer -> stateless app servers; this is the 'zero to millions' backbone",
+      "kind": "core",
+      "depth": "use",
+      "prereqs": [],
+      "detail": "full",
+      "focus": [
+        "request flow from DNS to server",
+        "vertical vs horizontal scaling and stateless servers",
+        "load balancers (L4/L7) and reverse proxies",
+        "CDN push vs pull for static assets",
+        "single points of failure and redundancy"
+      ],
+      "outcomes": [
+        "draw the request path for a web app and name what each hop does",
+        "explain why session state must leave the app server before scaling out, and where it goes",
+        "choose L4 vs L7 load balancing and push vs pull CDN for a given scenario and justify it",
+        "spot single points of failure in a diagram and remove them"
+      ],
+      "est_hours": 6,
+      "source_ids": [
+        "S0001",
+        "S0007"
+      ]
+    },
+    {
+      "id": "n04",
+      "topic": "caching-strategies",
+      "title": "Caching strategies",
+      "why": "Caching is the first answer to read-heavy load in almost every prompt; interviewers probe invalidation and failure modes",
+      "kind": "core",
+      "depth": "use",
+      "prereqs": [],
+      "est_hours": 6,
+      "detail": "stub"
+    },
+    {
+      "id": "n05",
+      "topic": "databases-sql-vs-nosql",
+      "title": "Databases: data modeling and SQL vs NoSQL",
+      "why": "Picking and modeling the store (relational, document, key-value, wide-column) is a decision in every design",
+      "kind": "core",
+      "depth": "use",
+      "prereqs": [],
+      "est_hours": 6,
+      "detail": "stub"
+    },
+    {
+      "id": "n06",
+      "topic": "replication-and-sharding",
+      "title": "Replication and sharding",
+      "why": "Read replicas and partitioning are how the data layer scales; consistent hashing and hot keys are standard follow-ups",
+      "kind": "core",
+      "depth": "use",
+      "prereqs": [
+        "n05"
+      ],
+      "est_hours": 7,
+      "detail": "stub"
+    },
+    {
+      "id": "n07",
+      "topic": "consistency-and-availability",
+      "title": "Consistency, CAP and availability",
+      "why": "Non-functional requirements are stated as consistency vs availability trade-offs; failover and availability numbers back them up",
+      "kind": "core",
+      "depth": "use",
+      "prereqs": [
+        "n06"
+      ],
+      "est_hours": 5,
+      "detail": "stub"
+    },
+    {
+      "id": "n01",
+      "topic": "system-design-interview-framework",
+      "title": "The system-design interview delivery framework",
+      "why": "A fixed track (requirements, entities, API, high-level design, deep dives) is the most common thing mid-level candidates lack and the fastest way to cut interview anxiety",
+      "kind": "core",
+      "depth": "use",
+      "prereqs": [],
+      "detail": "full",
+      "focus": [
+        "functional vs non-functional requirements",
+        "core entities and API sketch",
+        "high-level design before deep dives",
+        "time-boxing and communicating trade-offs",
+        "what interviewers assess at junior/mid vs senior level"
+      ],
+      "outcomes": [
+        "turn a vague prompt into 3 prioritized functional and 3 quantified non-functional requirements in 5 minutes",
+        "walk a simple prompt through every framework step within its time box in a 45-minute mock",
+        "name the four rubric areas and what a mid-level candidate is expected to show in each"
+      ],
+      "est_hours": 4,
+      "source_ids": [
+        "S0003",
+        "S0004",
+        "S0001",
+        "S0008"
+      ]
+    },
+    {
+      "id": "n08",
+      "topic": "design-a-url-shortener",
+      "title": "Design a URL shortener",
+      "why": "The classic first prompt: read-heavy, small data model, key generation; integrates framework, estimation, caching and DB choice",
+      "kind": "capstone",
+      "depth": "deep",
+      "prereqs": [
+        "n01",
+        "n02",
+        "n04",
+        "n05"
+      ],
+      "est_hours": 8,
+      "detail": "stub"
+    },
+    {
+      "id": "n09",
+      "topic": "message-queues-and-async",
+      "title": "Message queues and async processing",
+      "why": "Queues and pub/sub decouple slow work, absorb spikes and fan out events; needed by chat, notifications and feeds",
+      "kind": "core",
+      "depth": "use",
+      "prereqs": [],
+      "est_hours": 6,
+      "detail": "stub"
+    },
+    {
+      "id": "n10",
+      "topic": "api-and-real-time-communication",
+      "title": "API design and real-time communication",
+      "why": "Choosing REST/gRPC/GraphQL, pagination, idempotency, rate limiting, and polling vs SSE vs WebSocket shows up in every API step",
+      "kind": "core",
+      "depth": "use",
+      "prereqs": [
+        "n03"
+      ],
+      "est_hours": 6,
+      "detail": "stub"
+    },
+    {
+      "id": "n11",
+      "topic": "design-a-chat-system",
+      "title": "Design a chat system",
+      "why": "Builds on the learner's WebSocket background: connection servers, message fan-out across servers, storage and ordering",
+      "kind": "capstone",
+      "depth": "deep",
+      "prereqs": [
+        "n06",
+        "n09",
+        "n10"
+      ],
+      "est_hours": 9,
+      "detail": "stub"
+    },
+    {
+      "id": "n12",
+      "topic": "design-a-notification-system",
+      "title": "Design a notification system",
+      "why": "Queue-driven delivery to push/SMS/email with retries, deduplication and user preferences; a second practice prompt for queues and APIs that nothing later depends on, so it can be skipped under a short deadline",
+      "kind": "elective",
+      "depth": "use",
+      "prereqs": [
+        "n09",
+        "n10"
+      ],
+      "est_hours": 6,
+      "detail": "stub"
+    },
+    {
+      "id": "n13",
+      "topic": "design-a-news-feed",
+      "title": "Design a news feed",
+      "why": "Fan-out on write vs read, feed caching and celebrity hot keys: the integrating prompt for caching, sharding, queues and eventual consistency",
+      "kind": "capstone",
+      "depth": "deep",
+      "prereqs": [
+        "n04",
+        "n06",
+        "n07",
+        "n09"
+      ],
+      "est_hours": 9,
+      "detail": "stub"
+    }
+  ],
+  "milestones": [
+    {
+      "id": "m1",
+      "title": "Numbers and the read path",
+      "nodes": [
+        "n02",
+        "n03",
+        "n04"
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "The data layer and the interview framework",
+      "nodes": [
+        "n05",
+        "n06",
+        "n07",
+        "n01",
+        "n08"
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Async and real-time",
+      "nodes": [
+        "n09",
+        "n10",
+        "n11"
+      ]
+    },
+    {
+      "id": "m4",
+      "title": "Fan-out designs",
+      "nodes": [
+        "n12",
+        "n13"
+      ]
+    }
+  ],
+  "overrides": {},
+  "placement": {
+    "session": "2026-11-19-placement-system-design-db97",
+    "date": "2026-11-19",
+    "skipped": false,
+    "nodes": {
+      "n01": {
+        "mean": 0.333,
+        "confidence": 1.67,
+        "n": 3,
+        "recommend": "learn",
+        "topic": "system-design-interview-framework"
+      },
+      "n05": {
+        "mean": 0.833,
+        "confidence": 3.0,
+        "n": 3,
+        "recommend": "test_out",
+        "topic": "databases-sql-vs-nosql"
+      },
+      "n04": {
+        "mean": 0.583,
+        "confidence": 1.67,
+        "n": 3,
+        "recommend": "fast_track",
+        "topic": "caching-strategies"
+      },
+      "n07": {
+        "mean": 0.0,
+        "confidence": 1.67,
+        "n": 3,
+        "recommend": "learn",
+        "topic": "consistency-and-availability"
+      },
+      "n10": {
+        "mean": 0.556,
+        "confidence": 2.33,
+        "n": 3,
+        "recommend": "fast_track",
+        "topic": "api-and-real-time-communication"
+      },
+      "n03": {
+        "mean": 0.444,
+        "confidence": 1.67,
+        "n": 3,
+        "recommend": "learn",
+        "topic": "scaling-the-web-tier"
+      },
+      "n02": {
+        "mean": 0.222,
+        "confidence": 1.0,
+        "n": 3,
+        "recommend": "learn",
+        "topic": "back-of-envelope-estimation"
+      },
+      "n06": {
+        "mean": 0.611,
+        "confidence": 2.33,
+        "n": 3,
+        "recommend": "fast_track",
+        "topic": "replication-and-sharding"
+      }
+    }
+  },
+  "checkpoints": {},
+  "reviewed": [],
+  "created": "2026-11-19T14:06:48+07:00",
+  "updated": "2026-11-19T15:33:27+07:00",
+  "history": [
+    {
+      "at": "2026-11-19T14:06:48+07:00",
+      "version": 0,
+      "change": "created",
+      "reason": ""
+    },
+    {
+      "at": "2026-11-19T14:32:27+07:00",
+      "version": 1,
+      "change": "plan imported",
+      "reason": "initial plan, approved by learner",
+      "added": [
+        "n01",
+        "n02",
+        "n03",
+        "n04",
+        "n05",
+        "n06",
+        "n07",
+        "n08",
+        "n09",
+        "n10",
+        "n11",
+        "n12",
+        "n13"
+      ],
+      "removed": [],
+      "changed": {}
+    },
+    {
+      "at": "2026-11-19T15:08:19+07:00",
+      "version": 1,
+      "change": "placement recorded",
+      "reason": "n01=learn, n02=learn, n03=learn, n04=fast_track, n05=test_out, n06=fast_track, n07=learn, n10=fast_track"
+    },
+    {
+      "at": "2026-11-19T15:33:27+07:00",
+      "version": 2,
+      "change": "re-planned",
+      "reason": "learner: build base knowledge first; n01 (framework) moved just before the n08 capstone, its research is already read",
+      "added": [],
+      "removed": [],
+      "changed": {}
+    }
+  ]
+}
