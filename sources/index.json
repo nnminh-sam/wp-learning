@@ -8,7 +8,9 @@
       "kind": "code",
       "quality": 3,
       "topics": [
-        "system-design"
+        "back-of-envelope-estimation",
+        "system-design",
+        "system-design-interview-framework"
       ],
       "fetched": "2026-11-19T14:11:59+07:00",
       "chars": 75944,
@@ -36,7 +38,8 @@
       "kind": "course",
       "quality": 3,
       "topics": [
-        "system-design"
+        "system-design",
+        "system-design-interview-framework"
       ],
       "fetched": "2026-11-19T14:12:02+07:00",
       "chars": 13237,
@@ -50,7 +53,9 @@
       "kind": "course",
       "quality": 3,
       "topics": [
-        "system-design"
+        "back-of-envelope-estimation",
+        "system-design",
+        "system-design-interview-framework"
       ],
       "fetched": "2026-11-19T14:12:03+07:00",
       "chars": 17615,
@@ -92,7 +97,8 @@
       "kind": "course",
       "quality": 3,
       "topics": [
-        "system-design"
+        "system-design",
+        "system-design-interview-framework"
       ],
       "fetched": "2026-11-19T14:12:08+07:00",
       "chars": 32174,
@@ -106,7 +112,8 @@
       "kind": "course",
       "quality": 3,
       "topics": [
-        "system-design"
+        "system-design",
+        "system-design-interview-framework"
       ],
       "fetched": "2026-11-19T14:12:08+07:00",
       "chars": 1042,
@@ -152,6 +159,204 @@
       ],
       "fetched": "2026-11-19T14:12:12+07:00",
       "chars": 8667,
+      "notes": ""
+    },
+    {
+      "id": "S0012",
+      "url": "https://interviewing.io/guides/system-design-interview",
+      "norm_url": "https://interviewing.io/guides/system-design-interview",
+      "title": "interviewing.io System Design Interview guide",
+      "kind": "blog",
+      "quality": 2,
+      "topics": [
+        "system-design-interview-framework"
+      ],
+      "fetched": "2026-11-19T15:20:11+07:00",
+      "chars": 32110,
+      "notes": ""
+    },
+    {
+      "id": "S0013",
+      "url": "https://interviewing.io/blog/how-to-ace-system-design-interview",
+      "norm_url": "https://interviewing.io/blog/how-to-ace-system-design-interview",
+      "title": "x",
+      "kind": "blog",
+      "quality": 2,
+      "topics": [
+        "system-design-interview-framework"
+      ],
+      "fetched": "2026-11-19T15:20:12+07:00",
+      "chars": 340,
+      "notes": ""
+    },
+    {
+      "id": "S0014",
+      "url": "https://bytebytego.com/courses/system-design-interview/a-framework-for-system-design-interviews",
+      "norm_url": "https://bytebytego.com/courses/system-design-interview/a-framework-for-system-design-interviews",
+      "title": "ByteByteGo: A framework for system design interviews",
+      "kind": "book",
+      "quality": 3,
+      "topics": [
+        "back-of-envelope-estimation",
+        "system-design-interview-framework"
+      ],
+      "fetched": "2026-11-19T15:20:12+07:00",
+      "chars": 14662,
+      "notes": ""
+    },
+    {
+      "id": "S0015",
+      "url": "https://www.hellointerview.com/learn/system-design/in-a-hurry/core-concepts",
+      "norm_url": "https://www.hellointerview.com/learn/system-design/in-a-hurry/core-concepts",
+      "title": "Hello Interview core concepts",
+      "kind": "course",
+      "quality": 2,
+      "topics": [
+        "back-of-envelope-estimation",
+        "system-design-interview-framework"
+      ],
+      "fetched": "2026-11-19T15:20:14+07:00",
+      "chars": 25785,
+      "notes": ""
+    },
+    {
+      "id": "S0016",
+      "url": "https://www.hellointerview.com/blog/the-system-design-interview-what-is-expected-at-each-level",
+      "norm_url": "https://www.hellointerview.com/blog/the-system-design-interview-what-is-expected-at-each-level",
+      "title": "Hello Interview: System design interview, what is expected at each level",
+      "kind": "blog",
+      "quality": 3,
+      "topics": [
+        "system-design-interview-framework"
+      ],
+      "fetched": "2026-11-19T15:20:50+07:00",
+      "chars": 14624,
+      "notes": ""
+    },
+    {
+      "id": "S0017",
+      "url": "https://hellointerview.substack.com/p/what-your-system-design-interviewer",
+      "norm_url": "https://hellointerview.substack.com/p/what-your-system-design-interviewer",
+      "title": "Hello Interview: What your system design interviewer is really judging you on",
+      "kind": "blog",
+      "quality": 2,
+      "topics": [
+        "system-design-interview-framework"
+      ],
+      "fetched": "2026-11-19T15:20:52+07:00",
+      "chars": 16678,
+      "notes": ""
+    },
+    {
+      "id": "S0018",
+      "url": "https://algomaster.io/learn/system-design-interviews/expectations-by-level",
+      "norm_url": "https://algomaster.io/learn/system-design-interviews/expectations-by-level",
+      "title": "AlgoMaster: System design interview expectations by level",
+      "kind": "blog",
+      "quality": 1,
+      "topics": [
+        "system-design-interview-framework"
+      ],
+      "fetched": "2026-11-19T15:20:53+07:00",
+      "chars": 13912,
+      "notes": ""
+    },
+    {
+      "id": "S0019",
+      "url": "https://gist.githubusercontent.com/jboner/2841832/raw",
+      "norm_url": "https://gist.githubusercontent.com/jboner/2841832/raw",
+      "title": "Latency Numbers Every Programmer Should Know (Jeff Dean / Peter Norvig, jboner gist)",
+      "kind": "blog",
+      "quality": 3,
+      "topics": [
+        "back-of-envelope-estimation"
+      ],
+      "fetched": "2026-11-19T15:37:03+07:00",
+      "chars": 2594,
+      "notes": ""
+    },
+    {
+      "id": "S0020",
+      "url": "https://bytebytego.com/courses/system-design-interview/back-of-the-envelope-estimation",
+      "norm_url": "https://bytebytego.com/courses/system-design-interview/back-of-the-envelope-estimation",
+      "title": "ByteByteGo (Alex Xu): Back-of-the-envelope estimation",
+      "kind": "book",
+      "quality": 3,
+      "topics": [
+        "back-of-envelope-estimation"
+      ],
+      "fetched": "2026-11-19T15:37:05+07:00",
+      "chars": 7701,
+      "notes": ""
+    },
+    {
+      "id": "S0021",
+      "url": "https://www.designgurus.io/course-play/grokking-system-design-fundamentals/doc/a-worked-estimation-example",
+      "norm_url": "https://www.designgurus.io/course-play/grokking-system-design-fundamentals/doc/a-worked-estimation-example",
+      "title": "DesignGurus: A worked estimation example (estimates driving design)",
+      "kind": "course",
+      "quality": 2,
+      "topics": [
+        "back-of-envelope-estimation"
+      ],
+      "fetched": "2026-11-19T15:37:25+07:00",
+      "chars": 7118,
+      "notes": ""
+    },
+    {
+      "id": "S0022",
+      "url": "https://www.educative.io/blog/back-of-envelope-estimation-system-design-interview",
+      "norm_url": "https://www.educative.io/blog/back-of-envelope-estimation-system-design-interview",
+      "title": "Educative: Back-of-envelope estimation in system design interviews",
+      "kind": "blog",
+      "quality": 2,
+      "topics": [
+        "back-of-envelope-estimation"
+      ],
+      "fetched": "2026-11-19T15:37:27+07:00",
+      "chars": 10535,
+      "notes": ""
+    },
+    {
+      "id": "S0023",
+      "url": "https://www.hellointerview.com/learn/system-design/core-concepts/numbers-to-know",
+      "norm_url": "https://www.hellointerview.com/learn/system-design/core-concepts/numbers-to-know",
+      "title": "Hello Interview: Numbers to Know for System Design Interviews",
+      "kind": "course",
+      "quality": 2,
+      "topics": [
+        "back-of-envelope-estimation"
+      ],
+      "fetched": "2026-11-19T15:37:29+07:00",
+      "chars": 4827,
+      "notes": ""
+    },
+    {
+      "id": "S0024",
+      "url": "https://research.google.com/people/jeff/stanford-295-talk.pdf",
+      "norm_url": "https://research.google.com/people/jeff/stanford-295-talk.pdf",
+      "title": "Jeff Dean: Software Engineering Advice from Building Large-Scale Distributed Systems (Stanford CS295 slides)",
+      "kind": "talk",
+      "quality": 3,
+      "topics": [
+        "back-of-envelope-estimation"
+      ],
+      "fetched": "2026-11-19T15:37:33+07:00",
+      "chars": 400000,
+      "notes": ""
+    },
+    {
+      "id": "S0025",
+      "url": "https://www.systemdesignhandbook.com/guides/back-of-the-envelope-calculation/",
+      "norm_url": "https://www.systemdesignhandbook.com/guides/back-of-the-envelope-calculation",
+      "title": "System Design Handbook: Back of the envelope calculation",
+      "kind": "blog",
+      "quality": 2,
+      "topics": [
+        "back-of-envelope-estimation"
+      ],
+      "fetched": "2026-11-19T15:37:39+07:00",
+      "chars": 30127,
       "notes": ""
     }
   ]
