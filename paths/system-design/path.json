@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "id": "system-design",
+  "title": "System Design for Interviews",
+  "goal": "",
+  "learner": {},
+  "version": 0,
+  "nodes": [],
+  "milestones": [],
+  "overrides": {},
+  "placement": null,
+  "checkpoints": {},
+  "reviewed": [],
+  "created": "2026-11-19T14:06:48+07:00",
+  "updated": "2026-11-19T14:06:48+07:00",
+  "history": [
+    {
+      "at": "2026-11-19T14:06:48+07:00",
+      "version": 0,
+      "change": "created",
+      "reason": ""
+    }
+  ]
+}

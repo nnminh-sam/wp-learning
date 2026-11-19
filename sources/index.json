@@ -1,0 +1,158 @@
+{
+  "sources": [
+    {
+      "id": "S0001",
+      "url": "https://github.com/donnemartin/system-design-primer",
+      "norm_url": "https://github.com/donnemartin/system-design-primer",
+      "title": "system-design-primer README index",
+      "kind": "code",
+      "quality": 3,
+      "topics": [
+        "system-design"
+      ],
+      "fetched": "2026-11-19T14:11:59+07:00",
+      "chars": 75944,
+      "notes": ""
+    },
+    {
+      "id": "S0002",
+      "url": "https://roadmap.sh/system-design",
+      "norm_url": "https://roadmap.sh/system-design",
+      "title": "roadmap.sh System Design roadmap",
+      "kind": "other",
+      "quality": 2,
+      "topics": [
+        "system-design"
+      ],
+      "fetched": "2026-11-19T14:12:00+07:00",
+      "chars": 2029,
+      "notes": ""
+    },
+    {
+      "id": "S0003",
+      "url": "https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction",
+      "norm_url": "https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction",
+      "title": "Hello Interview System Design in a Hurry",
+      "kind": "course",
+      "quality": 3,
+      "topics": [
+        "system-design"
+      ],
+      "fetched": "2026-11-19T14:12:02+07:00",
+      "chars": 13237,
+      "notes": ""
+    },
+    {
+      "id": "S0004",
+      "url": "https://www.hellointerview.com/learn/system-design/in-a-hurry/delivery",
+      "norm_url": "https://www.hellointerview.com/learn/system-design/in-a-hurry/delivery",
+      "title": "Hello Interview Delivery framework",
+      "kind": "course",
+      "quality": 3,
+      "topics": [
+        "system-design"
+      ],
+      "fetched": "2026-11-19T14:12:03+07:00",
+      "chars": 17615,
+      "notes": ""
+    },
+    {
+      "id": "S0005",
+      "url": "https://dataintensive.net/",
+      "norm_url": "https://dataintensive.net/",
+      "title": "Designing Data-Intensive Applications (DDIA) — an O’Reilly book by Martin Kleppmann (The Wild Boar Book)",
+      "kind": "course",
+      "quality": 3,
+      "topics": [
+        "system-design"
+      ],
+      "fetched": "2026-11-19T14:12:06+07:00",
+      "chars": 4207,
+      "notes": ""
+    },
+    {
+      "id": "S0006",
+      "url": "https://github.com/ept/ddia2-feedback",
+      "norm_url": "https://github.com/ept/ddia2-feedback",
+      "title": "GitHub - ept/ddia2-feedback: Reader feedback on the early release of Designing Data-Intensive Applications, second edition · GitHub",
+      "kind": "course",
+      "quality": 3,
+      "topics": [
+        "system-design"
+      ],
+      "fetched": "2026-11-19T14:12:07+07:00",
+      "chars": 1820,
+      "notes": ""
+    },
+    {
+      "id": "S0007",
+      "url": "https://bytebytego.com/courses/system-design-interview/scale-from-zero-to-millions-of-users",
+      "norm_url": "https://bytebytego.com/courses/system-design-interview/scale-from-zero-to-millions-of-users",
+      "title": "ByteByteGo | Technical Interview Prep",
+      "kind": "course",
+      "quality": 3,
+      "topics": [
+        "system-design"
+      ],
+      "fetched": "2026-11-19T14:12:08+07:00",
+      "chars": 32174,
+      "notes": ""
+    },
+    {
+      "id": "S0008",
+      "url": "https://bytebytego.com/courses/system-design-interview",
+      "norm_url": "https://bytebytego.com/courses/system-design-interview",
+      "title": "ByteByteGo | Technical Interview Prep",
+      "kind": "course",
+      "quality": 3,
+      "topics": [
+        "system-design"
+      ],
+      "fetched": "2026-11-19T14:12:08+07:00",
+      "chars": 1042,
+      "notes": ""
+    },
+    {
+      "id": "S0009",
+      "url": "https://pdos.csail.mit.edu/6.824/schedule.html",
+      "norm_url": "https://pdos.csail.mit.edu/6.824/schedule.html",
+      "title": "6.5840 Schedule: Spring 2026",
+      "kind": "course",
+      "quality": 3,
+      "topics": [
+        "system-design"
+      ],
+      "fetched": "2026-11-19T14:12:10+07:00",
+      "chars": 4048,
+      "notes": ""
+    },
+    {
+      "id": "S0010",
+      "url": "https://www.cs.princeton.edu/courses/archive/fall18/cos418/schedule.html",
+      "norm_url": "https://www.cs.princeton.edu/courses/archive/fall18/cos418/schedule.html",
+      "title": "COS 418 - F18 - Distributed Systems",
+      "kind": "course",
+      "quality": 3,
+      "topics": [
+        "system-design"
+      ],
+      "fetched": "2026-11-19T14:12:11+07:00",
+      "chars": 3341,
+      "notes": ""
+    },
+    {
+      "id": "S0011",
+      "url": "https://www.cl.cam.ac.uk/teaching/2122/ConcDisSys/",
+      "norm_url": "https://www.cl.cam.ac.uk/teaching/2122/ConcDisSys",
+      "title": "Department of Computer Science and Technology – Course pages 2021–22: Concurrent and Distributed Systems",
+      "kind": "course",
+      "quality": 3,
+      "topics": [
+        "system-design"
+      ],
+      "fetched": "2026-11-19T14:12:12+07:00",
+      "chars": 8667,
+      "notes": ""
+    }
+  ]
+}
