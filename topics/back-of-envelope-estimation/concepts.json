@@ -1,0 +1,183 @@
+{
+  "concepts": [
+    {
+      "id": "back-of-envelope-meaning",
+      "name": "What back-of-envelope means",
+      "summary": "Quick, rounded arithmetic from stated assumptions and common performance numbers (Jeff Dean's definition) that aims for the right order of magnitude, to judge which designs can meet the requirements.",
+      "core": true,
+      "source_ids": [
+        "S0020",
+        "S0024",
+        "S0022",
+        "S0025"
+      ],
+      "related": [
+        "system-design-interview-framework:non-functional-requirements"
+      ],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "round-state-label",
+      "name": "Round, state assumptions, label units",
+      "summary": "Round to powers of 10 while calculating (1 day ≈ 10^5 s, 1M/day ≈ 10/s), write every assumption down, and put a unit on every number.",
+      "core": false,
+      "source_ids": [
+        "S0020",
+        "S0021",
+        "S0025"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "qps-from-dau",
+      "name": "QPS and peak QPS from DAU",
+      "summary": "Average QPS = DAU x requests per user per day ÷ 10^5; peak QPS = average x a stated peak factor (2x-10x); compute reads and writes separately to see the read:write ratio.",
+      "core": true,
+      "source_ids": [
+        "S0020",
+        "S0021",
+        "S0025"
+      ],
+      "related": [
+        "system-design-interview-framework:non-functional-requirements"
+      ],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "storage-estimate",
+      "name": "Storage estimate",
+      "summary": "Storage = item size x new items per day x days retained x copies; estimate item size from its fields, and do not apply the peak factor to storage.",
+      "core": true,
+      "source_ids": [
+        "S0020",
+        "S0021",
+        "S0025"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "bandwidth-estimate",
+      "name": "Bandwidth estimate",
+      "summary": "Bandwidth = peak QPS x payload per request, in and out separately; network links are quoted in bits, so multiply bytes per second by 8.",
+      "core": false,
+      "source_ids": [
+        "S0021",
+        "S0025",
+        "S0001",
+        "S0020"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "latency-orders-of-magnitude",
+      "name": "Latency orders of magnitude",
+      "summary": "RAM is ~100 ns, an SSD random read ~150 µs, a same-datacenter round trip ~0.5 ms, an HDD seek ~10 ms and a cross-region round trip 50-150 ms; know the ranking and the gaps, not the digits.",
+      "core": true,
+      "source_ids": [
+        "S0019",
+        "S0001",
+        "S0020",
+        "S0023",
+        "S0022",
+        "S0015"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "powers-of-two-units",
+      "name": "Powers of two and data units",
+      "summary": "Every 10 powers of two is about 1,000: 2^10 ≈ KB, 2^20 ≈ MB, 2^30 ≈ GB, 2^40 ≈ TB, 2^50 ≈ PB; 2^32 ≈ 4.3 billion.",
+      "core": false,
+      "source_ids": [
+        "S0001",
+        "S0020",
+        "S0025"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "availability-nines",
+      "name": "Availability in nines",
+      "summary": "Each extra nine cuts downtime 10x (99.9% ≈ 8.8 h/year, 99.99% ≈ 53 min/year); components in sequence multiply availability down, components in parallel raise it.",
+      "core": false,
+      "source_ids": [
+        "S0001",
+        "S0020"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "component-capacity",
+      "name": "What one component can handle",
+      "summary": "Modern rough limits: a SQL database up to ~50K transactions/s and a few TB per instance, Redis 100K+ ops/s, an app server 100K+ connections; older tables quote far lower numbers.",
+      "core": false,
+      "source_ids": [
+        "S0015",
+        "S0023",
+        "S0022"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "estimate-to-decision",
+      "name": "From estimate to decision",
+      "summary": "Put each estimate next to a component's limit: under it, keep one box; reads far above writes point to caching and replicas; tens of TB or 10K+ writes/s point to splitting data; petabytes of files point to object storage.",
+      "core": true,
+      "source_ids": [
+        "S0021",
+        "S0015",
+        "S0004"
+      ],
+      "related": [
+        "system-design-interview-framework:tradeoff-communication"
+      ],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "when-to-estimate",
+      "name": "When to estimate",
+      "summary": "Estimate the numbers that can change a decision, when they are needed; skip or shorten estimates that only conclude 'it's a lot'. Sources disagree on doing it upfront.",
+      "core": false,
+      "source_ids": [
+        "S0004",
+        "S0015",
+        "S0014",
+        "S0025"
+      ],
+      "related": [
+        "system-design-interview-framework:estimation-when-needed",
+        "system-design-interview-framework:delivery-framework-steps"
+      ],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "concepts": [
+    {
+      "id": "functional-requirements",
+      "name": "Prioritized functional requirements",
+      "summary": "Turn a vague prompt into 'Users should be able to...' statements through clarifying questions, then keep only the top 3 core features to design for.",
+      "core": true,
+      "source_ids": [
+        "S0004",
+        "S0014",
+        "S0012",
+        "S0017"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "non-functional-requirements",
+      "name": "Quantified non-functional requirements",
+      "summary": "State the few system qualities that matter (availability vs consistency, scale, latency, durability) tied to a part of the system and given a number, e.g. 'feed renders in < 200 ms'.",
+      "core": true,
+      "source_ids": [
+        "S0004",
+        "S0017"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "estimation-when-needed",
+      "name": "Estimate only when it changes a decision",
+      "summary": "Skip upfront back-of-the-envelope math by default; do the numbers during the design when they decide between options, such as one instance vs sharding.",
+      "core": false,
+      "source_ids": [
+        "S0004",
+        "S0015",
+        "S0014",
+        "S0001"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "delivery-framework-steps",
+      "name": "Delivery framework and time boxes",
+      "summary": "In a 45-minute interview go requirements (~5), core entities (~2), API (~5), optional data flow, high-level design (~10-15), deep dives (~10); Alex Xu's 4 steps cover the same arc with a wrap-up.",
+      "core": true,
+      "source_ids": [
+        "S0004",
+        "S0014",
+        "S0001",
+        "S0012"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "core-entities-and-api",
+      "name": "Core entities and API sketch",
+      "summary": "List the nouns the system stores and exchanges as a first draft, then sketch a few REST endpoints that map to the functional requirements, in minutes, not tens of minutes.",
+      "core": false,
+      "source_ids": [
+        "S0004",
+        "S0015"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "high-level-design-first",
+      "name": "High-level design before deep dives",
+      "summary": "First draw a simple, complete design that satisfies every endpoint, noting future complexity in a word; only then harden it against the non-functional requirements in deep dives.",
+      "core": false,
+      "source_ids": [
+        "S0004",
+        "S0014",
+        "S0018"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "tradeoff-communication",
+      "name": "Driving the conversation and stating trade-offs",
+      "summary": "Think out loud, follow every choice with what it costs and why that fits the requirements, make a decision, and treat interviewer pushback as a hint to explore.",
+      "core": false,
+      "source_ids": [
+        "S0017",
+        "S0012",
+        "S0014"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "interview-failure-modes",
+      "name": "Common failure modes",
+      "summary": "Candidates fail by running out of time, diving deep too early, jumping to solutions, staying silent when stuck, over-engineering, and fighting feedback.",
+      "core": false,
+      "source_ids": [
+        "S0004",
+        "S0014",
+        "S0012",
+        "S0017"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "rubric-areas",
+      "name": "The four rubric areas",
+      "summary": "Interviewers assess Problem Navigation, Solution Design, Technical Excellence, and Communication and Collaboration; Problem Navigation is often the most important.",
+      "core": true,
+      "source_ids": [
+        "S0003",
+        "S0017"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    },
+    {
+      "id": "level-expectations",
+      "name": "Mid-level vs senior expectations",
+      "summary": "A mid-level candidate must deliver a complete working design with broad but shallow knowledge and drive the early steps, while the interviewer leads deep dives; a senior goes deep in ~2 areas and finds the hard problems unprompted.",
+      "core": true,
+      "source_ids": [
+        "S0016",
+        "S0003",
+        "S0004",
+        "S0012",
+        "S0018"
+      ],
+      "related": [],
+      "added_in": 1,
+      "status": "new",
+      "mastered_at": null
+    }
+  ]
+}

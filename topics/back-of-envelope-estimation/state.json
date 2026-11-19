@@ -1,0 +1,30 @@
+{
+  "slug": "back-of-envelope-estimation",
+  "title": "Back-of-envelope estimation",
+  "depth": "use",
+  "fresh": true,
+  "stage": "read",
+  "version": 1,
+  "round": 1,
+  "relearn": false,
+  "created": "2026-11-19T15:33:43+07:00",
+  "updated": "2026-11-19T15:42:28+07:00",
+  "history": [
+    {
+      "stage": "prior",
+      "at": "2026-11-19T15:33:43+07:00",
+      "note": "created"
+    },
+    {
+      "stage": "research",
+      "at": "2026-11-19T15:36:20+07:00",
+      "note": ""
+    },
+    {
+      "stage": "read",
+      "at": "2026-11-19T15:42:28+07:00",
+      "note": ""
+    }
+  ],
+  "rounds_log": []
+}

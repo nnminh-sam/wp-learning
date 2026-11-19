@@ -1,0 +1,30 @@
+{
+  "slug": "system-design-interview-framework",
+  "title": "The system-design interview delivery framework",
+  "depth": "use",
+  "fresh": true,
+  "stage": "read",
+  "version": 1,
+  "round": 1,
+  "relearn": false,
+  "created": "2026-11-19T15:18:29+07:00",
+  "updated": "2026-11-19T15:24:16+07:00",
+  "history": [
+    {
+      "stage": "prior",
+      "at": "2026-11-19T15:18:29+07:00",
+      "note": "created"
+    },
+    {
+      "stage": "research",
+      "at": "2026-11-19T15:19:26+07:00",
+      "note": ""
+    },
+    {
+      "stage": "read",
+      "at": "2026-11-19T15:24:16+07:00",
+      "note": ""
+    }
+  ],
+  "rounds_log": []
+}

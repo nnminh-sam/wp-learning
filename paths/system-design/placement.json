@@ -1,0 +1,529 @@
+{
+  "items": [
+    {
+      "type": "mcq",
+      "concept": "n01",
+      "difficulty": 2,
+      "prompt": "You are asked to design a Twitter-like feed. Which of these is the best-written **non-functional requirement** for the requirements step?",
+      "options": [
+        "Users should be able to see posts from the accounts they follow",
+        "The system should be fast, reliable and scalable for all users",
+        "Home feeds render in under 200 ms for a user base of 100M DAU",
+        "The system should cache home feeds in Redis to keep reads fast"
+      ],
+      "answer": 2,
+      "misconceptions": {
+        "0": "This is a functional requirement (a 'users should be able to...' statement), not a system quality.",
+        "1": "It sounds like an NFR, but it is unquantified and true of nearly every system, so it does not guide the design.",
+        "3": "This is a design decision (an implementation choice), not a requirement; it belongs in the high-level design or deep dives."
+      },
+      "source_ids": [
+        "S0004"
+      ],
+      "explanation": "Non-functional requirements describe system qualities and should be put in context and quantified where possible: '<200 ms feed rendering at 100M DAU' names the part of the system that must be fast and gives a target. 'Fast and scalable' is too vague to drive decisions, 'users should be able to see posts' is functional, and 'use Redis' is a solution, not a requirement.",
+      "id": "p001",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "explain",
+      "concept": "n01",
+      "difficulty": 3,
+      "prompt": "You are 20 minutes into a 45-minute system design interview, drawing the high-level design. While wiring up the first endpoint you notice the design would benefit from a cache and probably a message queue. What should you do at this moment, and why? Tie your answer to the most common reason mid-level candidates fail these interviews.",
+      "reference_answer": "Call out the cache and queue briefly (say it and jot a note on the diagram), then keep going and finish a simple high-level design that satisfies every functional requirement, endpoint by endpoint. Extra complexity belongs in the deep dives, where you use it to meet the non-functional requirements. The reason is that the most common way mid-level candidates fail is not delivering a working system, often described as poor time management; layering on complexity too early is how candidates run out of time before the design is complete.",
+      "rubric": [
+        "Says to note the cache/queue briefly (verbal callout or written note) instead of designing it now",
+        "Says to first finish a simple design that meets the core functional requirements, then add complexity in the deep dives for non-functional requirements",
+        "Names failing to deliver a complete working system (time management) as the main risk of adding complexity early"
+      ],
+      "source_ids": [
+        "S0004",
+        "S0003"
+      ],
+      "explanation": "The delivery framework keeps the high-level design simple and pushes complexity such as caches and queues to the deep dives, because the most common mid-level failure is not reaching a complete working system. Designing the cache in detail right away feels proactive, but it uses up the time you need to finish the design.",
+      "id": "p002",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "mcq",
+      "concept": "n01",
+      "difficulty": 2,
+      "prompt": "How do interviewers' expectations for the **deep dive** phase differ between a mid-level and a senior candidate?",
+      "options": [
+        "Both must deliver a full design; a mid-level candidate may let the interviewer point out weak spots, while a senior is expected to find them and lead",
+        "A mid-level candidate is not expected to finish a full design; a partial design with one strong deep dive is enough at that level",
+        "A mid-level candidate should skip most of the requirements step so that more time is left for deep dives, as seniors do",
+        "There is no difference: every candidate must proactively lead the deep dives and talk through as many topics as possible"
+      ],
+      "answer": 0,
+      "misconceptions": {
+        "1": "All candidates are expected to complete a full design that satisfies the requirements; level changes the depth, not completeness.",
+        "2": "Skipping requirements is a classic Problem Navigation failure at any level.",
+        "3": "Proactive leadership is the senior expectation, and talking over the interviewer hurts the communication score."
+      },
+      "source_ids": [
+        "S0003",
+        "S0004"
+      ],
+      "explanation": "All candidates are expected to complete a design that meets the requirements. A mid-level candidate may cover the basics without great depth and can expect the interviewer to point out where to improve; senior candidates move through the basics quickly and are expected to find the bottlenecks and lead the deep dives themselves.",
+      "id": "p003",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "predict",
+      "concept": "n02",
+      "difficulty": 2,
+      "prompt": "Using the assumptions below, estimate the **average** and **peak** read QPS for the timeline service. Show the arithmetic you would say out loud in an interview.",
+      "code": "Daily active users (DAU):      10,000,000\nTimeline reads per user/day:   10\nPeak traffic:                  2x the average\nSeconds per day:               86,400 (round as you like)",
+      "reference_answer": "Reads per day = 10M x 10 = 100M. A day has 86,400 s, roughly 10^5 s, so the average is 100M / ~100k = about 1,000 QPS (exactly ~1,160). Peak is 2x average, so about 2,000-2,300 QPS. Rounding 86,400 up to 100,000 is fine because a back-of-envelope estimate only needs to be within about 2x.",
+      "rubric": [
+        "Computes total daily reads as about 100 million",
+        "Divides by seconds per day (~86,400 or ~10^5) to get an average of roughly 1,000-1,200 QPS",
+        "Doubles the average to get a peak of roughly 2,000-2,400 QPS"
+      ],
+      "source_ids": [
+        "S0001",
+        "S0004"
+      ],
+      "explanation": "QPS = (DAU x actions per user per day) / seconds per day. 100M / 86,400 is about 1,160, and rounding the day to 10^5 seconds gives about 1,000, which is accurate enough for a design decision. Peak = 2 x average, about 2,300. A common slip is to divide by 3,600 (seconds per hour) or to forget the peak factor.",
+      "id": "p004",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "order",
+      "concept": "n02",
+      "difficulty": 2,
+      "prompt": "Order these operations from **fastest to slowest** (typical latency).",
+      "steps": [
+        "Main memory reference",
+        "Round trip within the same datacenter",
+        "HDD disk seek",
+        "Packet round trip California -> Netherlands -> California"
+      ],
+      "source_ids": [
+        "S0001"
+      ],
+      "explanation": "Approximate figures: memory reference ~100 ns, same-datacenter round trip ~0.5 ms, HDD seek ~10 ms, cross-continent round trip ~150 ms. Each step is roughly an order of magnitude or more slower than the one before it. The common mistake is to assume any network hop is slower than local disk; a round trip inside a datacenter is about 20x faster than an HDD seek.",
+      "id": "p005",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "explain",
+      "concept": "n02",
+      "difficulty": 3,
+      "prompt": "You are designing a 'like' button for posts. You can estimate peak like-writes per second. Explain what that estimate is *for* in the interview, and how two different results, about **300 writes/s** versus about **300,000 writes/s**, would lead you to different designs for storing like counts.",
+      "reference_answer": "An estimate is only worth doing when it changes a decision; here it decides whether a single write database is enough or the write path must scale out. At ~300 writes/s, a single primary database (scaled vertically, with read replicas if needed) handles the load comfortably, so adding sharding would be needless complexity. At ~300,000 writes/s the load is far beyond what one write master should take, so you need to scale writes horizontally, for example by sharding the counts by post id (and possibly buffering or batching writes through a queue). The answer should explicitly link the number to the choice.",
+      "rubric": [
+        "States that the estimate's purpose is to drive a design decision (not just to produce numbers)",
+        "For ~300 writes/s, keeps a single primary database and avoids premature sharding/complexity",
+        "For ~300,000 writes/s, says a single write node is not enough and proposes scaling writes out (sharding, or buffering/batching writes)"
+      ],
+      "source_ids": [
+        "S0004",
+        "S0007",
+        "S0001"
+      ],
+      "explanation": "Do the math only when it influences the design. A single, vertically scaled primary can go a long way (Stack Overflow ran on one master database in 2013), so a low write rate means keep it simple. A write rate orders of magnitude higher means one master becomes the bottleneck and a single point of failure, which justifies horizontal scaling such as sharding. Calculating QPS and then saying 'OK, it's a lot' earns no credit.",
+      "id": "p006",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "explain",
+      "concept": "n03",
+      "difficulty": 2,
+      "prompt": "Your NestJS app stores login sessions in each server's process memory. Traffic grows, so you add a second server behind a round-robin load balancer. Users now report being logged out at random. Explain why this happens and how to fix it so you can keep adding servers.",
+      "reference_answer": "The servers are stateful: a user's session lives only in the memory of the server that created it. With round robin, the next request may go to the other server, which has no session for that user, so authentication fails. The fix is to make the web tier stateless by moving session state into a shared data store (e.g. Redis/Memcached or a database) that every server reads; then any server can handle any request and servers can be added or removed freely (autoscaling). Sticky sessions on the load balancer are a workaround, but they make adding/removing servers and handling server failures harder.",
+      "rubric": [
+        "Explains that the session exists only on one server, and the load balancer sends some requests to a server without it",
+        "Fix: move session/state out of the app servers into a shared store (Redis, database, etc.) so the web tier is stateless",
+        "Notes that sticky sessions are only a workaround with drawbacks (scaling in/out and server failures are harder), or that a stateless tier enables autoscaling"
+      ],
+      "source_ids": [
+        "S0007",
+        "S0001"
+      ],
+      "explanation": "Stateful servers force every request from a client to the same server. Moving state into a shared store makes servers interchangeable, which is the precondition for horizontal scaling and autoscaling. Sticky sessions hide the symptom, but they bring back the coupling to one server and make failures and scaling painful.",
+      "id": "p007",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "mcq",
+      "concept": "n03",
+      "difficulty": 2,
+      "prompt": "You want requests to `/videos/*` to go to servers optimized for video and requests to `/billing/*` to go to security-hardened servers. Which load balancer fits, and why?",
+      "options": [
+        "Layer 4, because it is faster and can still match on the URL path in each request",
+        "Layer 7, because it reads application data such as the path, headers and cookies",
+        "Layer 4, because routing by path only needs the destination IP address and port",
+        "DNS round robin, because it can send each URL path to a different server pool"
+      ],
+      "answer": 1,
+      "misconceptions": {
+        "0": "L4 is cheaper, but it only sees transport-level info (IPs and ports), not the URL path.",
+        "2": "Both paths share the same IP and port; the distinction is in the HTTP request, which L4 does not read.",
+        "3": "DNS resolves a hostname to an IP; it never sees the URL path."
+      },
+      "source_ids": [
+        "S0001"
+      ],
+      "explanation": "A Layer 7 load balancer terminates the connection, reads the HTTP message (path, headers, cookies) and routes on it, which is exactly the source's example of sending video traffic and billing traffic to different servers. Layer 4 only uses source/destination IPs and ports, so it is faster and cheaper but cannot route by path.",
+      "id": "p008",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "mcq",
+      "concept": "n03",
+      "difficulty": 3,
+      "prompt": "A high-traffic e-commerce site serves millions of product images, and new products are added all the time. Which CDN model fits better, and why?",
+      "options": [
+        "Push CDN, because heavy traffic means every image must be uploaded to the CDN before the first request",
+        "Pull CDN, because images are fetched on first request and only recently requested content stays cached",
+        "Push CDN, because a pull CDN cannot set a TTL, so its cached images would never expire",
+        "No CDN, because a CDN only helps sites whose static content rarely changes over time"
+      ],
+      "answer": 1,
+      "misconceptions": {
+        "0": "Pushing millions of images, most rarely viewed, maximizes CDN storage; push suits low-traffic or rarely updated sites.",
+        "2": "Pull CDNs are controlled by a TTL; that is how they decide when to refetch.",
+        "3": "CDNs exist precisely to offload heavy static traffic; rarely-changing content is the push-CDN case, not a reason to avoid CDNs."
+      },
+      "source_ids": [
+        "S0001",
+        "S0007"
+      ],
+      "explanation": "Pull CDNs fetch content from the origin when a user first requests it and keep it for a TTL, so storage tracks what people actually view and traffic spreads evenly; that fits heavy-traffic sites. The trade-off is a slower first request. Push CDNs require you to upload content when it changes, which suits small or rarely updated sites.",
+      "id": "p009",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "predict",
+      "concept": "n04",
+      "difficulty": 2,
+      "prompt": "The functions below run in this order: `getUser(42)` at 10:00 (cache empty), `updateEmail(42, 'new@x.com')` at 10:05, `getUser(42)` at 10:10. Predict which email the 10:10 call returns, until when that stays true, and what one-line change fixes it.",
+      "code": "async function getUser(id) {\n  const cached = await redis.get(`user:${id}`);\n  if (cached) return JSON.parse(cached);\n  const user = await db.users.findById(id);\n  await redis.set(`user:${id}`, JSON.stringify(user), 'EX', 3600); // 1h TTL\n  return user;\n}\n\nasync function updateEmail(id, email) {\n  await db.users.update(id, { email });\n}",
+      "reference_answer": "The 10:10 call returns the OLD email. The 10:00 call missed the cache and stored the user with a 1-hour TTL; updateEmail only writes to the database and never touches the cache, so at 10:10 the cache hit returns the stale object. It stays stale until the TTL expires at about 11:00. Fix: in updateEmail, delete (invalidate) the `user:42` key after the DB write, or write the new value to the cache (write-through).",
+      "rubric": [
+        "Predicts the 10:10 call returns the old (stale) email from the cache",
+        "Explains that the write path updates only the database and does not invalidate/update the cache entry",
+        "States it stays stale until the TTL expires (~11:00)",
+        "Proposes invalidating the key on update (or updating the cache / write-through)"
+      ],
+      "source_ids": [
+        "S0001",
+        "S0007"
+      ],
+      "explanation": "This is cache-aside (lazy loading): the app reads the cache, falls back to the DB on a miss, and fills the cache. Its main weakness is staleness when the DB is updated behind the cache's back; a TTL only bounds how long data stays stale. Invalidating the key on write (or combining with write-through) fixes it.",
+      "id": "p010",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "mcq",
+      "concept": "n04",
+      "difficulty": 2,
+      "prompt": "Which cache update strategy can **lose writes that were already acknowledged to the user** if the cache node crashes?",
+      "options": [
+        "Cache-aside, because the application reads through the cache before it reads the DB",
+        "Write-through, because every write goes to the cache before it reaches the database",
+        "Write-behind, because the cache acknowledges and writes to the database asynchronously",
+        "Refresh-ahead, because entries are reloaded from the database before they have expired"
+      ],
+      "answer": 2,
+      "misconceptions": {
+        "0": "In cache-aside the database is written directly; losing the cache only costs cache misses, not data.",
+        "1": "Write-through writes to the database synchronously before returning, so an acknowledged write is already durable.",
+        "3": "Refresh-ahead only affects reads; a bad prediction costs performance, not data."
+      },
+      "source_ids": [
+        "S0001"
+      ],
+      "explanation": "Write-behind (write-back) updates the cache and writes to the data store asynchronously, which makes writes fast but means data can be lost if the cache goes down before its contents reach the database. Write-through is slower on writes because it writes to the DB synchronously, but the cache is never ahead of the DB.",
+      "id": "p011",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "explain",
+      "concept": "n04",
+      "difficulty": 3,
+      "prompt": "A read-heavy product page uses cache-aside with a **single** Redis node in front of PostgreSQL. During peak traffic the Redis node restarts and comes back empty. Explain what happens to latency and to the database, and name two design measures that reduce this risk.",
+      "reference_answer": "Every request now misses the cache, so each read costs three trips (cache miss, DB query, cache fill) and latency rises. The full read load the cache had been absorbing suddenly hits PostgreSQL, which may be overloaded and slow down or fail until the cache warms up again. Measures: avoid a single cache server as a single point of failure by running multiple cache nodes (across data centers or zones); overprovision cache memory; and treat the cache as volatile, so the database stays the source of truth and important data is persisted there.",
+      "rubric": [
+        "Says all reads miss, so the load shifts to the database, which can be overloaded",
+        "Says latency rises (each miss needs extra trips) until the cache warms up",
+        "Names at least one sound mitigation: multiple cache nodes / remove the single point of failure, or overprovisioning memory",
+        "Notes the cache is volatile, so the database must remain the source of truth (important data is not kept only in cache)"
+      ],
+      "source_ids": [
+        "S0007",
+        "S0001"
+      ],
+      "explanation": "A cache in front of a DB hides the DB's true load. When an empty node replaces a failed one, cache-aside pays three trips per miss and the DB takes the full read load at once. A single cache server is a single point of failure, so the sources recommend multiple cache servers and overprovisioned memory, and never storing important data only in a volatile cache.",
+      "id": "p012",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "mcq",
+      "concept": "n05",
+      "difficulty": 2,
+      "prompt": "For a checkout service that must decrement inventory and create an order and a payment record **together**, with frequent joins across orders, users and products, which store is the better default, and why?",
+      "options": [
+        "A document store, because order data is JSON-shaped and maps naturally onto Node objects",
+        "A relational database, because the data is relational and needs transactions and joins",
+        "A key-value store, because checkout must be very low latency and lookups are by order id",
+        "A wide-column store, because checkout data will grow large and needs to scale horizontally"
+      ],
+      "answer": 1,
+      "misconceptions": {
+        "0": "JSON-shaped data is not a reason on its own; the deciding needs here are multi-record transactions and joins.",
+        "2": "Key-value stores give fast lookups by key but do not support joins or multi-record transactions well.",
+        "3": "Relational databases have clear, well-known scaling patterns; scale alone does not justify giving up transactions."
+      },
+      "source_ids": [
+        "S0001",
+        "S0007"
+      ],
+      "explanation": "Reasons to pick SQL include structured, relational data, a strict schema, complex joins and transactions, which is exactly checkout. Most NoSQL stores lack true ACID transactions and generally do not support joins, so you would have to rebuild them in application code. Relational databases are the sensible default unless the use case gives a specific reason to move away.",
+      "id": "p013",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "explain",
+      "concept": "n05",
+      "difficulty": 3,
+      "prompt": "A teammate says: \"MongoDB scales and Postgres doesn't, so let's put everything for our marketplace in MongoDB.\" The marketplace has (a) orders and payments and (b) a clickstream log of every page view (very high write volume, rarely joined, its fields change often). Argue where each kind of data should live and correct the teammate's claim.",
+      "reference_answer": "Orders and payments belong in a relational database: they are structured, relational data that need transactions, a strict schema and joins. The clickstream fits a NoSQL store (e.g. wide-column or document): it is semi-structured with a changing schema, write-heavy at high throughput, needs no joins, and can accept eventual consistency. The teammate's claim is wrong because relational databases do scale, through read replicas, federation, sharding and denormalization, and they have clear, well-established scaling patterns. The choice should follow the shape of the data and how it is accessed, not a general belief about which database scales.",
+      "rubric": [
+        "Puts orders/payments in a relational DB, citing transactions/ACID, relational structure or joins",
+        "Puts the clickstream in a NoSQL store, citing high write throughput, flexible/semi-structured schema or no joins",
+        "Rejects 'Postgres doesn't scale' by naming at least one relational scaling technique (replication, sharding, federation, denormalization)",
+        "Frames the choice as driven by data shape and access patterns rather than one store for everything"
+      ],
+      "source_ids": [
+        "S0001",
+        "S0007"
+      ],
+      "explanation": "The sources list SQL's strengths (relational data, transactions, joins, clear scaling patterns) and NoSQL's (semi-structured data, flexible schema, very high throughput, no joins); rapid ingest of clickstream and log data is listed as well suited to NoSQL. Picking a store per kind of data, instead of one store for everything, is what interviewers look for.",
+      "id": "p014",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "mcq",
+      "concept": "n05",
+      "difficulty": 2,
+      "prompt": "Your reads outnumber writes 1000:1 and a hot page needs an expensive three-table join, so you **denormalize** (store redundant copies of the joined fields). What is the main cost you take on?",
+      "options": [
+        "Reads get slower, because each row now carries extra copied columns",
+        "Writes must keep redundant copies in sync, and heavy writes can be slower than before",
+        "The database can no longer run transactions on the denormalized tables",
+        "It only works in NoSQL stores; relational databases cannot be denormalized"
+      ],
+      "answer": 1,
+      "misconceptions": {
+        "0": "Denormalization exists to make reads faster by avoiding joins.",
+        "2": "Denormalization changes the schema, not the transaction support of the database.",
+        "3": "Relational databases denormalize too; PostgreSQL and Oracle even offer materialized views to manage the redundant copies."
+      },
+      "source_ids": [
+        "S0001"
+      ],
+      "explanation": "Denormalization trades write performance for read performance: data is duplicated, every write must update the redundant copies (with added design complexity to keep them consistent), and under heavy write load a denormalized schema can perform worse than a normalized one. With a 1000:1 read/write ratio that trade is usually worth it.",
+      "id": "p015",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "predict",
+      "concept": "n06",
+      "difficulty": 2,
+      "prompt": "Writes go to the primary and reads go to a pool of read replicas that replicate **asynchronously** (current lag ~300 ms). A user saves a new display name and the client immediately reloads the profile. Predict what the user may see, explain why, and suggest a fix.",
+      "code": "// NestJS service\nasync updateName(userId: string, name: string) {\n  await this.primary.query('UPDATE users SET name = $1 WHERE id = $2', [name, userId]);\n}\n\nasync getProfile(userId: string) {\n  // round-robin over read replicas\n  return this.replicaPool.query('SELECT * FROM users WHERE id = $1', [userId]);\n}",
+      "reference_answer": "The reload can show the OLD name. The write was committed on the primary, but replication is asynchronous, so a replica that has not yet applied the change (within the ~300 ms lag) answers the read. This is eventual consistency and replication lag. A fix is read-your-own-writes: read the profile from the primary for that user right after they write (or for a short window), or route that user's reads to an up-to-date replica.",
+      "rubric": [
+        "Predicts the user may see the old (stale) name",
+        "Explains it with asynchronous replication / replication lag: the replica has not applied the write yet",
+        "Suggests a sensible fix, such as reading from the primary after a user's own write (read-your-writes)"
+      ],
+      "source_ids": [
+        "S0001",
+        "S0007",
+        "S0011"
+      ],
+      "explanation": "With asynchronous replication, data reaches replicas eventually, not immediately, so a read routed to a lagging replica returns old data even though the write succeeded. More replicas and more write load increase the lag. Sending a user's reads to the primary right after their own write gives read-after-write consistency for that user.",
+      "id": "p016",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "mcq",
+      "concept": "n06",
+      "difficulty": 3,
+      "prompt": "Users are sharded with `shard = user_id % 4`. One shard is nearly full, so you add a fifth shard and change the function to `user_id % 5`. What happens to existing data?",
+      "options": [
+        "Nothing moves; only users who sign up after the change are placed on the new fifth shard",
+        "About one fifth of users move to the new shard, which is the least possible data movement",
+        "Most users map to a different shard, so most data moves; consistent hashing would limit that",
+        "No data needs to move, because each shard can keep serving the users it already stores"
+      ],
+      "answer": 2,
+      "misconceptions": {
+        "0": "Lookups use the new function for every user, so an old user whose id now maps elsewhere would not be found unless their data moves.",
+        "1": "Moving ~1/N of keys is what consistent hashing achieves, not plain modulo hashing.",
+        "3": "After the function changes, reads are routed by the new mapping, so data left in place becomes unreachable."
+      },
+      "source_ids": [
+        "S0007",
+        "S0001"
+      ],
+      "explanation": "With modulo hashing, changing N from 4 to 5 changes the shard of most keys (only about 1 in 5 keep the same shard), so resharding requires updating the sharding function and moving most of the data. Consistent hashing is the standard technique for reducing how much data has to move when shards are added or removed.",
+      "id": "p017",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "explain",
+      "concept": "n06",
+      "difficulty": 3,
+      "prompt": "A social app shards posts by `user_id`. When a celebrity posts, the shard holding their data is overwhelmed with reads while the other shards stay idle. Explain why adding more shards does **not** fix this, and propose two approaches that do.",
+      "reference_answer": "This is the celebrity (hotspot key) problem: all of one user's data is on the single shard their key maps to, so adding shards redistributes other keys but this key's traffic still lands on one shard. Fixes: give the celebrity a dedicated shard and, if needed, partition that celebrity's data further; put a cache in front so hot reads are served from memory instead of the shard; or add read replicas for the hot shard to spread its reads.",
+      "rubric": [
+        "Explains that one key always maps to one shard, so more shards do not split that key's load (hotspot/celebrity problem)",
+        "Proposes a dedicated shard and/or further partitioning of the hot key's data",
+        "Proposes absorbing hot reads with a cache (or read replicas for the hot shard)"
+      ],
+      "source_ids": [
+        "S0007",
+        "S0001"
+      ],
+      "explanation": "Sharding spreads keys, not the load of a single key. A hot key needs special handling: isolate it on its own shard (possibly partitioned further) and absorb read spikes with caching or replicas. Choosing a sharding key that spreads data evenly helps in general, but it cannot split the traffic for one celebrity.",
+      "id": "p018",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "mcq",
+      "concept": "n07",
+      "difficulty": 2,
+      "prompt": "Which statement about the CAP theorem is accurate for a database replicated across several nodes?",
+      "options": [
+        "You can pick any two of the three, so a CA design that drops partition tolerance is a sound choice for this kind of setup",
+        "Because network partitions will happen, the real choice during one is consistency (risking errors) or availability (risking stale data)",
+        "The C in CAP is the same property as the C in ACID, so any ACID-compliant database is automatically CP",
+        "Choosing AP means replicas never agree, so an AP system cannot be used whenever users need to see their data"
+      ],
+      "answer": 1,
+      "misconceptions": {
+        "0": "Networks are unreliable, so partition tolerance is not optional in a distributed system; 'pick any two' is a misreading.",
+        "2": "ACID consistency means a transaction keeps the database in a valid state; CAP consistency means every read sees the latest write across nodes.",
+        "3": "AP systems are eventually consistent: writes propagate once the partition heals."
+      },
+      "source_ids": [
+        "S0001",
+        "S0004"
+      ],
+      "explanation": "Partition tolerance is a given in distributed systems, so the trade-off is consistency vs availability when a partition happens. A CP system may time out or return an error rather than serve stale data; an AP system answers with the most readily available version, which may be stale, and converges later (eventual consistency).",
+      "id": "p019",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "explain",
+      "concept": "n07",
+      "difficulty": 2,
+      "prompt": "You already know ACID. Explain the difference between the **C in ACID** and the **C in CAP**, and give one example of a system that has one kind of consistency but not the other.",
+      "reference_answer": "ACID consistency means each transaction moves the database from one valid state to another, so constraints and invariants hold. It is about the correctness of data within a single database's transactions. CAP consistency means every read receives the most recent write (or an error), even across multiple copies of the data. It is about replicas agreeing on recency. Example: a single PostgreSQL primary with asynchronously replicated read replicas runs ACID transactions on the primary, but a read from a lagging replica can return stale data, so it is not CAP-consistent for those reads.",
+      "rubric": [
+        "Defines ACID consistency as transactions keeping the database in a valid state (constraints/invariants)",
+        "Defines CAP consistency as every read seeing the most recent write (or an error) across nodes/replicas",
+        "Gives a valid example that separates them (e.g. ACID primary with async replicas serving stale reads)"
+      ],
+      "source_ids": [
+        "S0001"
+      ],
+      "explanation": "The two properties share a letter but answer different questions. ACID-C asks whether a transaction preserves the database's rules. CAP-C asks whether every reader sees the latest write when the data is copied across nodes. An ACID database with asynchronous replicas is a common example where the first holds and the second does not.",
+      "id": "p020",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "predict",
+      "concept": "n07",
+      "difficulty": 3,
+      "prompt": "A request succeeds only if **both** the API service and the database are up. Predict (1) the overall availability of setup A and its approximate downtime per year, and (2) the overall availability of setup B, where the database is replaced by two independent replicas and either one can serve the request.",
+      "code": "Setup A:  client -> API service (99.9%) -> database (99.9%)\nSetup B:  client -> API service (99.9%) -> [ replica 1 (99.9%) | replica 2 (99.9%) ]   (either replica is enough)\n\nReference: 99.9% availability ~ 8h 45m downtime per year",
+      "reference_answer": "Components in sequence multiply: A = 0.999 x 0.999 = about 99.8%, which is roughly double the downtime of three nines, about 17.5 hours per year. In parallel, the data tier fails only if both replicas fail: 1 - (0.001 x 0.001) = 99.9999%. Setup B is then 0.999 x 0.999999 = about 99.9%, so the API service, still a single component in sequence, now limits availability.",
+      "rubric": [
+        "Computes setup A as about 99.8% by multiplying availabilities in sequence",
+        "Estimates downtime for A at roughly 17-18 hours per year (about double three nines)",
+        "Computes the parallel replicas as about 99.9999% using 1 - (1-a)(1-b)",
+        "Concludes setup B is about 99.9% overall, limited by the API service"
+      ],
+      "source_ids": [
+        "S0001"
+      ],
+      "explanation": "Availability in sequence is the product, so each extra dependency lowers it. Availability in parallel is 1 minus the product of the failure probabilities, so redundancy raises it sharply. Once one tier is redundant, the remaining single component in sequence sets the ceiling, which is why redundancy has to be built in at every tier.",
+      "id": "p021",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "multi",
+      "concept": "n10",
+      "difficulty": 2,
+      "prompt": "A mobile client on a flaky network automatically retries any request that times out. By HTTP semantics, which of these methods are **idempotent**, meaning a retry cannot produce a different outcome than a single call? Select all that apply.",
+      "options": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "answer": [
+        0,
+        2,
+        4
+      ],
+      "source_ids": [
+        "S0001"
+      ],
+      "explanation": "GET, PUT and DELETE are idempotent: reading, replacing a resource with the same representation, or deleting it gives the same result however many times it runs. POST creates a resource or triggers a process, so a blind retry can create duplicates (two orders, two payments). PATCH is not guaranteed idempotent (for example 'increment by 1'). That is why retrying a POST safely needs extra design, such as an idempotency key.",
+      "id": "p022",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "mcq",
+      "concept": "n10",
+      "difficulty": 3,
+      "prompt": "Your product has a web app, a mobile app and a smartwatch app. Each screen needs a different subset of nested data (post, author, comments), and mobile users complain that each screen needs several round trips with the current REST API. Which API choice best addresses this, and why?",
+      "options": [
+        "gRPC for all clients, because it is faster than REST, so it fixes slow screens for every client type",
+        "GraphQL, because each client can ask for exactly the fields it needs in one request, avoiding over- and under-fetching",
+        "WebSockets for every request, because a persistent connection removes the need for separate API calls",
+        "Keep REST and return every nested field on every endpoint, so each client gets everything it could need"
+      ],
+      "answer": 1,
+      "misconceptions": {
+        "0": "RPC/gRPC is the pick for internal service-to-service calls where performance matters; speed does not solve clients needing different data shapes.",
+        "2": "WebSockets/SSE are for real-time push, added alongside the core API, not a replacement for it.",
+        "3": "Bloating every response is REST's over-fetching problem; it increases payload size and latency, especially on mobile."
+      },
+      "source_ids": [
+        "S0004",
+        "S0001"
+      ],
+      "explanation": "REST is the default, but its known weaknesses are multiple round trips for nested resources and payloads growing with fields clients don't need, which hurts mobile clients. GraphQL is the stated choice when diverse clients have different data needs, because each client specifies exactly what it wants. gRPC is for internal service-to-service performance, and WebSockets/SSE are for real-time updates.",
+      "id": "p023",
+      "created": "2026-11-19T14:36:41+07:00"
+    },
+    {
+      "type": "explain",
+      "concept": "n10",
+      "difficulty": 2,
+      "prompt": "In the API step of an interview, a candidate proposes this endpoint for following another user. The app uses JWT authentication. Identify the two problems with this design and explain how you would rewrite it.",
+      "code": "POST /v1/follow\nbody: {\n  \"userId\": \"123\",      // the user who is following\n  \"followeeId\": \"456\"\n}",
+      "reference_answer": "First, the follower's identity comes from the request body, so any client could send someone else's userId and follow on their behalf. The current user must be derived from the authenticated token (the JWT in the request header), never from user input. Second, REST resources should be plural nouns that model entities, not verbs or singular actions: use `POST /v1/follows` with body `{ \"followee_id\": \"456\" }`, and the server takes the follower from the token.",
+      "rubric": [
+        "Identifies that taking userId from the body is a security flaw (a client can act as another user)",
+        "States that the current user must be derived from the auth token (JWT) in the header",
+        "Rewrites the resource as a plural noun, e.g. POST /v1/follows, with only the followee in the body"
+      ],
+      "source_ids": [
+        "S0004",
+        "S0001"
+      ],
+      "explanation": "In the API step, resources are plural nouns built from the core entities (User, Tweet, Follow -> /follows), and the caller's identity always comes from authentication, not the request body. Trusting a body-supplied userId is a common mistake even among people who use JWTs daily; interviewers look for it.",
+      "id": "p024",
+      "created": "2026-11-19T14:36:41+07:00"
+    }
+  ]
+}
